@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.API", "AuthServer.Api\AuthServer.API.csproj", "{BFE720B7-6FD0-4AE0-9208-320728EB1DB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer.API", "AuthServer.Api\AuthServer.API.csproj", "{BFE720B7-6FD0-4AE0-9208-320728EB1DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Core", "AuthServer.Core\AuthServer.Core.csproj", "{C9D0E499-8858-4B0B-A78C-09B6395D7D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer.Core", "AuthServer.Core\AuthServer.Core.csproj", "{C9D0E499-8858-4B0B-A78C-09B6395D7D48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Data", "AuthServer.Data\AuthServer.Data.csproj", "{66B9851D-6202-4668-B49A-1B5716FA612D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer.Data", "AuthServer.Data\AuthServer.Data.csproj", "{66B9851D-6202-4668-B49A-1B5716FA612D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer.Service", "AuthServer.Service\AuthServer.Service.csproj", "{0071D609-1832-4C1D-AE7A-657F0241E0E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer.Service", "AuthServer.Service\AuthServer.Service.csproj", "{0071D609-1832-4C1D-AE7A-657F0241E0E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTest1.API", "ExtermalTest1.Api\ExternalTest1.API.csproj", "{DDBC66A8-CEB7-44B7-8D09-B92E0CB42BC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalTest1.API", "ExtermalTest1.Api\ExternalTest1.API.csproj", "{DDBC66A8-CEB7-44B7-8D09-B92E0CB42BC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTest2.API", "ExtermalTest2.Api\ExternalTest2.API.csproj", "{B2BA0C90-7054-466F-8646-73ADFBD2327B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalTest2.API", "ExtermalTest2.Api\ExternalTest2.API.csproj", "{B2BA0C90-7054-466F-8646-73ADFBD2327B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExternalTest3.API", "ExternalTest3.API\ExternalTest3.API.csproj", "{E90929F0-0152-4436-8078-024C32132B20}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExternalTest3.API", "ExternalTest3.API\ExternalTest3.API.csproj", "{E90929F0-0152-4436-8078-024C32132B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5DA603D2-BAF5-4B20-860A-E2145855CE62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Shared\Shared.csproj", "{5DA603D2-BAF5-4B20-860A-E2145855CE62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
