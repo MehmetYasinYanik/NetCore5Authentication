@@ -4,6 +4,7 @@ using AuthServer.Core.Model;
 using AuthServer.Core.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Shared.Configuration;
 using System;
 using System.Collections.Generic;
@@ -61,8 +62,30 @@ namespace AuthServer.Service.Service
 
         public TokenDto CreateToken(UserApp userApp)
         {
-            throw new NotImplementedException();
+            var accessTokenExpiration = DateTime.Now.AddMinutes(_customTokenOption.AccessTokenExpiration);
+            var refreshTokenExpiration = DateTime.Now.AddMinutes(_customTokenOption.RefreshTokenExpiration);
+            var securityKey = SignService.GetSymmetricSecurityKey(_customTokenOption.SecurityKey);
+
+            var jwtSecurityToken = new JwtSecurityToken(
+                issuer: _customTokenOption.Issuer,
+                expires: accessTokenExpiration,
+                notBefore: DateTime.Now,
+                claims: GetClaims(userApp, _customTokenOption.Audience),
+                signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature));
+
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.WriteToken(jwtSecurityToken);
+
+            var tokenDto = new TokenDto()
+            {
+                AccessToken = token,
+                RefreshToken = CreateRefreshToken(),
+                AccessTokenExpiration = accessTokenExpiration,
+                RefreshTokenExpiration = refreshTokenExpiration
+            };
+            return tokenDto;
         }
+
 
         public ClientTokenDto CreateTokenyClient(Client client)
         {
