@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Shared.Configuration;
 using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 
 namespace AuthServer.Service.Service
@@ -21,7 +25,20 @@ namespace AuthServer.Service.Service
             _customTokenOption = options.Value;
         }
 
-        private string CreateRefreshToken() 
+        private IEnumerable<Claim> GetClaims(UserApp userApp, List<string> audiences)
+        {
+            var userList = new List<Claim> {
+            new Claim(ClaimTypes.NameIdentifier,userApp.Id),
+            new Claim(JwtRegisteredClaimNames.Email,userApp.Email),
+            new Claim(ClaimTypes.Name,userApp.UserName),
+            new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())};
+
+            userList.AddRange(audiences.Select(x => new Claim(JwtRegisteredClaimNames.Aud, x)));
+            return userList;
+        }
+
+
+        private string CreateRefreshToken()
         {
             //return Guid.NewGuid().ToString();
 
