@@ -86,9 +86,15 @@ namespace AuthServer.Service.Service
             return Response<TokenDto>.Success(token, 200);
         }
 
-        public Task<Response<EmptyDataDto>> RevokeRefreshToken(string refreshToken)
+        public async Task<Response<EmptyDataDto>> RevokeRefreshToken(string refreshToken)
         {
-            throw new System.NotImplementedException();
+            //35
+            var currentRefreshToken = await _userRefreshToken.Where(i => i.Code == refreshToken).SingleOrDefaultAsync();
+            if (currentRefreshToken == null)
+                return Response<EmptyDataDto>.Fail("Refresh token not found", 404, true);
+            _userRefreshToken.Remove(currentRefreshToken);
+            await _unitOfWork.CommitAsync();
+            return Response<EmptyDataDto>.Success(200);
         }
     }
 }
