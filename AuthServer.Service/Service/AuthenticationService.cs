@@ -60,9 +60,14 @@ namespace AuthServer.Service.Service
             return Response<TokenDto>.Success(token, 200);
         }
 
-        public Task<Response<ClientTokenDto>> CreateTokenByClientAsync(ClientLoginDto clientLoginDto)
+        public Response<ClientTokenDto> CreateTokenByClientAsync(ClientLoginDto clientLoginDto)
         {
-            throw new System.NotImplementedException();
+            //33
+            var client = _clients.SingleOrDefault(i => i.Id == clientLoginDto.ClientId && i.Secret == clientLoginDto.ClientSecret);
+            if (client == null) 
+                return Response<ClientTokenDto>.Fail("Client Id or Client Secret Not Found.", 404, true);
+            var token = _tokenService.CreateTokenClient(client);
+            return Response<ClientTokenDto>.Success(token, 200);
         }
 
         public Task<Response<TokenDto>> CreateTokenByRefreshTokenAsync(string refreshToken)

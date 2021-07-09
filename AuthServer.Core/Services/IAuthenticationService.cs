@@ -9,6 +9,6 @@ namespace AuthServer.Core.Services
         Task<Response<TokenDto>> CreateTokenAsync(LoginDto loginDto);
         Task<Response<TokenDto>> CreateTokenByRefreshTokenAsync(string refreshToken);
         Task<Response<EmptyDataDto>> RevokeRefreshToken(string refreshToken);
-        Task<Response<ClientTokenDto>> CreateTokenByClientAsync(ClientLoginDto clientLoginDto);
+        Response<ClientTokenDto> CreateTokenByClientAsync(ClientLoginDto clientLoginDto);
     }
 }
