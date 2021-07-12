@@ -15,7 +15,7 @@ using System.Security.Cryptography;
 
 namespace AuthServer.Service.Service
 {
-    class TokenService : ITokenService
+    public class TokenService : ITokenService
     {
         private readonly UserManager<UserApp> _userManager;
         private readonly CustomTokenOption _customTokenOption;

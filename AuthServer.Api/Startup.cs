@@ -1,8 +1,17 @@
 using AuthServer.Core.Configuration;
+using AuthServer.Core.Model;
+using AuthServer.Core.Repository;
+using AuthServer.Core.Services;
+using AuthServer.Core.UnitOfWork;
+using AuthServer.Data;
+using AuthServer.Data.Repository;
+using AuthServer.Service.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +37,28 @@ namespace AuthServer.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //37
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped(typeof(IService<,>), typeof(GenericService<,>));
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddDbContext<AppDbContext>(options => 
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("SqlServer"),sqlOptions=> {
+                    sqlOptions.MigrationsAssembly("AuthServer.Data");
+                });
+            });
+
+            services.AddIdentity<UserApp, IdentityRole>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
             services.Configure<CustomTokenOption>(Configuration.GetSection("TokenOption"));
             services.Configure<List<Client>>(Configuration.GetSection("Clients"));
             services.AddControllers();
