@@ -18,23 +18,27 @@ namespace AuthServer.API.Controllers
         {
             _service = service;
         }
-
-        public async Task<IActionResult> GetProducts() 
+        [HttpPost]
+        public async Task<IActionResult> GetProducts()
         {
             return ActionResultInstance(await _service.GetAllAsync());
         }
+        [HttpPost]
         public async Task<IActionResult> GetById(ProductDto productDto)
         {
             return ActionResultInstance(await _service.GetByIdAsync(productDto.Id));
         }
+        [HttpPost]
         public async Task<IActionResult> AddProduct(ProductDto productDto)
         {
             return ActionResultInstance(await _service.AddAsync(productDto));
         }
+        [HttpPost]
         public async Task<IActionResult> UpdateProduct(ProductDto productDto)
         {
             return ActionResultInstance(await _service.Update(productDto, productDto.Id));
         }
+        [HttpPost("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             return ActionResultInstance(await _service.Remove(id));
