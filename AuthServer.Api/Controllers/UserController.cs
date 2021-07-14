@@ -25,7 +25,7 @@ namespace AuthServer.API.Controllers
 
         [Authorize]
         [HttpGet]
-        public async Task<IActionResult> GetUser(CreateUserDto createUserDto)
+        public async Task<IActionResult> GetUser()
         {
             return ActionResultInstance(await _userService.GetUserByNameAsync(HttpContext.User.Identity.Name));
         }
