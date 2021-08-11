@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace AuthServer.Core.Dto
 {
     public class CreateUserDto
