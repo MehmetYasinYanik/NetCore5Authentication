@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Shared.Configuration;
+using Shared.Exceptions;
 using Shared.Extensions;
 using Shared.Service;
 using System;
@@ -93,8 +94,6 @@ namespace AuthServer.Api
             }
             );
 
-            
-
             services.AddControllers().AddFluentValidation(options=> {
                 options.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
@@ -116,6 +115,8 @@ namespace AuthServer.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthServer.Api v1"));
             }
+
+            app.UseCustomException();
 
             app.UseHttpsRedirection();
             app.UseRouting();
